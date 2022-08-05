@@ -33,7 +33,7 @@ const FormRegister = () => {
     const formSchema = yup.object().shape({
         name: yup.string().required('Nome é obrigatório'),
         email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
-        password: yup.string().required("Senha obrigatória").matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/, "Senha deve possuir ao menos 1 número, 1 letra minúscula, 1 letra maiúscula e 1 caracter especial(#?!@$ %^&*-)"),
+        password: yup.string().required("Senha obrigatória").matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/, "Ao menos 1 número, 1 letra minúscula, 1 letra maiúscula e 1 caracter especial (#?!@$ %^&*-)"),
         confirmPassword: yup.string().oneOf([yup.ref('password')], "Confirmação deve ser igual a senha"),
         bio: yup.string().required("Bio é obrigatório"),
         contact: yup.string().required("Contato é obrigatório"),

@@ -83,7 +83,7 @@ export const Form = styled.form`
 
     .form-error {
         font-size: 12px;
-        height: 12px;
+        height: 20px;
         color: var(--error);
     }
 
