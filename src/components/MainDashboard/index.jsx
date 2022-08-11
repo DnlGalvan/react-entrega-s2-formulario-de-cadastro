@@ -1,12 +1,13 @@
 import { Main } from "./styles";
 import { HiPlus } from "react-icons/hi";
 import TechsList from "../TechsList";
+import Modal from "../Modal";
 import { useContext } from "react";
 import { TechContext } from "../../constexts/TechContext";
 
 const MainDashboard = () => {
-  const { addTech } = useContext(TechContext);
-
+  const { modal, setModal} = useContext(TechContext)
+  
   return (
     <Main>
       <section className="dashboard-content">
@@ -14,14 +15,12 @@ const MainDashboard = () => {
           <h3 className="infos-title">Tecnologias</h3>
           <button
             className="infos-add-tech"
-            onClick={() => addTech({
-              "title": "Teste4",
-              "status": "Avançado",
-            })}
+            onClick={() => setModal(true)}
           >
             <HiPlus />
           </button>
         </div>
+        {modal && <Modal />}
         <TechsList />
       </section>
     </Main>
