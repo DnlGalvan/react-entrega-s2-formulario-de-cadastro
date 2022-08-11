@@ -2,33 +2,14 @@ import { Main, Container, Title, Form, DivTitle, ButtonBack  } from "./styles"
 import * as yup from "yup"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import api from "../../services/api"
 import { useNavigate } from "react-router-dom"
-import { toast, ToastContainer } from "react-toastify"
+import { UserContext } from "../../constexts/UserContext"
 import 'react-toastify/dist/ReactToastify.css'
+import { useContext } from "react"
 
 const FormRegister = () => {
     const navigate = useNavigate()
-    const notify = (status, message) => {
-        status === 'sucess' && toast.success("Conta criada com sucesso!", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        })
-        status === 'error' && toast.error(message, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        })
-    }
+    const { onSubmitRegister } = useContext(UserContext)
     
     const formSchema = yup.object().shape({
         name: yup.string().required('Nome é obrigatório'),
@@ -44,18 +25,6 @@ const FormRegister = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(formSchema),
     });
-    
-    const onSubmit = (data) => {
-        console.log(data)
-        api.post('/users', data)
-            .then(response => {
-                notify('sucess')
-            })
-            .catch(err => {
-                notify('error', err.response.data.message)
-            })
-    
-    }
 
     return(
         <Main>
@@ -64,7 +33,7 @@ const FormRegister = () => {
                     <Title>Kenzie Hub</Title>
                     <ButtonBack onClick={() => navigate('/login')}>Voltar</ButtonBack>
                 </DivTitle>
-                <Form onSubmit={handleSubmit(onSubmit)}>
+                <Form onSubmit={handleSubmit(onSubmitRegister)}>
                     <h3 className="form-title">Crie sua conta</h3>
                     <p className="form-info">Rápido e grátis, vamos nessa</p>
                     <label className="form-label" htmlFor="name">Nome</label>
@@ -94,7 +63,6 @@ const FormRegister = () => {
                     </select>
                     <span className="form-error">{errors.course_module?.message}</span>
                     <button className="form-button" type="submit" >Cadastrar</button>
-                    <ToastContainer />
                 </Form>
             </Container>
         </Main>

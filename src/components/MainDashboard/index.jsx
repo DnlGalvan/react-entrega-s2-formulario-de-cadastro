@@ -1,13 +1,24 @@
-import { Main } from "./styles"
+import { Main } from "./styles";
+import { HiPlus } from "react-icons/hi";
+import TechsList from "../TechsList";
+import { useContext } from "react";
+import { TechContext } from "../../constexts/TechContext";
 
 const MainDashboard = () => {
-    return(
-        <Main>
-            <section className="dashboard-content">
-                <h2 className="dashboard-title">Que pena! Estamos em desenvolvimento :(</h2>
-                <p className="dashboard-info">Nossa aplicação está em desenvolvimento, em breve teremos novidades</p>
-            </section>
-        </Main>
-    ) 
-}
-export default MainDashboard
+  const { setModal } = useContext(TechContext);
+
+  return (
+    <Main>
+      <section className="dashboard-content">
+        <div className="dashboard-infos">
+          <h3 className="infos-title">Tecnologias</h3>
+          <button className="infos-add-tech" onClick={() => setModal(true)}>
+            <HiPlus />
+          </button>
+        </div>
+        <TechsList />
+      </section>
+    </Main>
+  );
+};
+export default MainDashboard;
