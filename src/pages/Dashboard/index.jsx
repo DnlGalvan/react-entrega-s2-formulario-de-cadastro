@@ -3,11 +3,12 @@ import { Navigate } from "react-router-dom"
 import Header from "../../components/Header"
 import NavBar from "../../components/NavBar"
 import MainDashboard from "../../components/MainDashboard"
+import { useContext } from 'react'
+import { UserContext } from '../../constexts/UserContext'
 
 const Dashboard = () => {
-    const userToken = localStorage.getItem('userToken')
-    const user = JSON.parse(localStorage.getItem('user'))
-
+    const { user } = useContext(UserContext);
+    
     return (
         <motion.div
             initial={{opacity: 0}}
@@ -15,9 +16,9 @@ const Dashboard = () => {
             exit={{opacity: 0}}
             transition={{ duration: 1}}
         >
-            {!userToken && <Navigate to={"/login"} />}
+            {!user && <Navigate to={"/login"} />}
             <NavBar />
-            <Header user={user}/>
+            <Header />
             <MainDashboard />
         </motion.div>
     )

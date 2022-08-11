@@ -8,9 +8,11 @@ export const Nav = styled.nav`
     height: 70px;
 
     .nav-container {
-        width: 70%;
+        width: 95%;
+        max-width: 1792px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
         .nav-title {
             color: var(--color-primary);
