@@ -28,36 +28,46 @@ export const UserProvider = ({ children }) => {
     loadUser();
   }, [user]);
 
-  const onSubmitLogin =  async (data) => {
+  const onSubmitLogin = async (data) => {
     await api
       .post("/sessions", data)
       .then((res) => {
         localStorage.setItem("userToken", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
-        setUser(res.data.user)
-        toast.success(`Bem vindo, ${res.data.user.name}`)
+        setUser(res.data.user);
+        toast.success(`Bem vindo, ${res.data.user.name}`, {
+          theme: "colored",
+        });
         navigate("/dashboard", { replace: true });
       })
       .catch((error) => {
-        toast.error(error.res.data.message);
-        localStorage.clear()
+        toast.error(error.response.data.message, {
+          theme: "colored",
+        });
+        localStorage.clear();
       });
   };
 
-  const onSubmitRegister =  async (data) => {
+  const onSubmitRegister = async (data) => {
     await api
       .post("/users", data)
       .then((res) => {
-        toast.success("Conta criada com sucesso!");
+        toast.success("Conta criada com sucesso!", {
+          theme: "colored",
+        });
         navigate("/login", { replace: true });
       })
       .catch((error) => {
-        toast.error(error.response.data.message);
+        toast.error(error.response.data.message, {
+          theme: "colored",
+        });
       });
   };
 
   return (
-    <UserContext.Provider value={{ user, loading, onSubmitLogin, onSubmitRegister }}>
+    <UserContext.Provider
+      value={{ user, loading, onSubmitLogin, onSubmitRegister }}
+    >
       {children}
     </UserContext.Provider>
   );

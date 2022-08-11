@@ -36,5 +36,10 @@ export const Tech = styled.li`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0 5px;
+
+    :active {
+      background: var(--color-primary);
+    }
   }
 `;

@@ -1,44 +1,96 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    position: absolute;
-    z-index: 999;
-    width: 100%;
-    max-width: 400px;
-    height: 970px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 35px;
-`
+  position: absolute;
+  z-index: 5;
+  top: 55%;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export const DivTitle = styled.div`
-    height: 50px;
-    width: 92%;
-    display: flex;
-    justify-content: space-between;
-    background: var(--gray-2);
+  height: 50px;
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--gray-2);
+  border-radius: 4px 4px 0 0;
+  padding: 0 15px;
 
-    > h3 {
-        color: var(--gray-0);
-        font-size: 14px;
-    }
-
-`
+  > h3 {
+    color: var(--gray-0);
+    font-size: 14px;
+  }
+`;
 
 export const ButtonClose = styled.button`
-    width: 20px;
-    height: 20px;
-    background: transparent;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-radius: 4px;
+  color: var(--gray-1);
+
+  :hover {
+    color: var(--gray-0);
+    scale: 1.2;
+  }
+
+  :active {
+    background: var(--color-primary);
+  }
+`;
+export const Form = styled.form`
+  width: 95%;
+  background: var(--gray-3);
+  color: var(--gray-0);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 15px;
+  gap: 10px;
+
+  > label {
+    font-size: 12px;
+  }
+
+  > input,
+  select {
+    height: 48px;
+    background: var(--gray-2);
     border-radius: 4px;
-    color: var(--gray-1);
+    color: var(--gray-0);
+    padding-left: 15px;
+    ::placeholder {
+      color: var(--gray-1);
+    }
+    :focus {
+      border: 1.5px solid var(--gray-0);
+    }
+  }
+
+  > span {
+    font-size: 12px;
+    height: 20px;
+    color: var(--error);
+  }
+
+  button {
+    height: 48px;
+    border-radius: 4px;
+    background: var(--color-primary);
+    color: var(--gray-0);
+    font-size: 16px;
+    font-weight: 500;
 
     :hover {
-        color: var(--gray-0);
-        scale: 1.2;
+      background: var(--color-primary-focus);
     }
 
-    :active {
-        background: var(--color-primary);
+    :disabled {
+      background: var(--color-primary-disabled);
     }
-`
+  }
+`;

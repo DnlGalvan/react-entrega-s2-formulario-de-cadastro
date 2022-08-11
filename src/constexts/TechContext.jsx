@@ -5,20 +5,24 @@ import api from "../services/api";
 export const TechContext = createContext({});
 
 export const TechProvider = ({ children }) => {
-  const [modal, setModal] = useState(false)
-  
+  const [modal, setModal] = useState(false);
+
   const addTech = async (data) => {
     const token = localStorage.getItem("userToken");
     api.defaults.headers.authorization = `Bearer ${token}`;
     await api
       .post("/users/techs", data)
       .then((res) => {
-        toast.success("Tecnologia adicionada com sucesso");
-        setModal(false)
+        toast.success("Tecnologia adicionada com sucesso", {
+          theme: "colored",
+        });
+        setModal(false);
       })
       .catch((err) => {
         console.log(err);
-        toast.error(err.response.data.message);
+        toast.error(err.response.data.message, {
+          theme: "colored",
+        });
       });
   };
 
@@ -28,11 +32,15 @@ export const TechProvider = ({ children }) => {
     await api
       .delete(`/users/techs/${techId}`)
       .then((res) => {
-        toast.success("Tecnologia excluída com sucesso");
+        toast.success("Tecnologia excluída com sucesso", {
+          theme: "colored",
+        });
       })
       .catch((err) => {
         console.log(err);
-        toast.error(err.response.data.message);
+        toast.error(err.response.data.message, {
+          theme: "colored",
+        });
       });
   };
 
