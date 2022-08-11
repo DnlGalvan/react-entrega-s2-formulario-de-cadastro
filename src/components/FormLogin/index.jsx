@@ -3,7 +3,6 @@ import * as yup from "yup"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useNavigate } from "react-router-dom"
-import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
 import { useContext } from "react"
 import { UserContext } from "../../constexts/UserContext"
@@ -43,7 +42,6 @@ const FormLogin = () => {
                     </ContainerRegister>
                 </Form>
             </Container>
-            <ToastContainer />
         </Main>
     )
 }

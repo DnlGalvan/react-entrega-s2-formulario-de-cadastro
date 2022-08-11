@@ -9,7 +9,6 @@ export const UserProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     async function loadUser() {
@@ -20,25 +19,27 @@ export const UserProvider = ({ children }) => {
           api.defaults.headers.authorization = `Bearer ${token}`;
           const { data } = await api.get("/profile");
           setUser(data);
-        } catch (err) {
-          console.error(err);
+        } catch (error) {
+          console.error(error);
         }
       }
       setLoading(false);
     }
     loadUser();
-  }, []);
+  }, [user]);
 
   const onSubmitLogin =  async (data) => {
     await api
       .post("/sessions", data)
-      .then((response) => {
-        localStorage.setItem("userToken", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
+      .then((res) => {
+        localStorage.setItem("userToken", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        setUser(res.data.user)
+        toast.success(`Bem vindo, ${res.data.user.name}`)
         navigate("/dashboard", { replace: true });
       })
-      .catch((err) => {
-        toast.error(err.response.data.message);
+      .catch((error) => {
+        toast.error(error.res.data.message);
         localStorage.clear()
       });
   };
@@ -46,17 +47,17 @@ export const UserProvider = ({ children }) => {
   const onSubmitRegister =  async (data) => {
     await api
       .post("/users", data)
-      .then((response) => {
+      .then((res) => {
         toast.success("Conta criada com sucesso!");
         navigate("/login", { replace: true });
       })
-      .catch((err) => {
-        toast.error(err.response.data.message);
+      .catch((error) => {
+        toast.error(error.response.data.message);
       });
   };
 
   return (
-    <UserContext.Provider value={{ user, loading, modal, setModal, onSubmitLogin, onSubmitRegister }}>
+    <UserContext.Provider value={{ user, loading, onSubmitLogin, onSubmitRegister }}>
       {children}
     </UserContext.Provider>
   );

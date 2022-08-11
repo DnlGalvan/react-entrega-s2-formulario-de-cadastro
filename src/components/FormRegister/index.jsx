@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useNavigate } from "react-router-dom"
 import { UserContext } from "../../constexts/UserContext"
-import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
 import { useContext } from "react"
 
@@ -64,7 +63,6 @@ const FormRegister = () => {
                     </select>
                     <span className="form-error">{errors.course_module?.message}</span>
                     <button className="form-button" type="submit" >Cadastrar</button>
-                    <ToastContainer />
                 </Form>
             </Container>
         </Main>

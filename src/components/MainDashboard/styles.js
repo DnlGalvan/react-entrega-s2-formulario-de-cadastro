@@ -36,5 +36,9 @@ export const Main = styled.main`
         :hover {
             background: var(--gray-2);
         }
+
+        :active {
+            background: var(--color-primary);
+        }
     }
 `
