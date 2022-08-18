@@ -71,13 +71,25 @@ export const Form = styled.form`
     }
   }
 
+  > input:disabled {
+    cursor: not-allowed;
+  }
+
   > span {
     font-size: 12px;
     height: 20px;
     color: var(--error);
   }
 
-  button {
+  > div {
+    display: flex;
+    gap: 10px;
+
+  
+  }
+  > button,
+  div button {
+    width: 100%;
     height: 48px;
     border-radius: 4px;
     background: var(--color-primary);
@@ -93,4 +105,13 @@ export const Form = styled.form`
       background: var(--color-primary-disabled);
     }
   }
+
+  > div button + button {
+    width: 50%;
+    background: var(--gray-1);
+    :hover {
+      background: var(--gray-2);
+    }
+  }
+
 `;

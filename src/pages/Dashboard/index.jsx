@@ -11,7 +11,7 @@ import { Div } from "./styles";
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
-  const { modal } = useContext(TechContext);
+  const { modal, modalEdit } = useContext(TechContext);
 
   return (
     <motion.div
@@ -23,6 +23,7 @@ const Dashboard = () => {
       {!user && <Navigate to={"/login"} />}
       <Div>
         {modal && <Modal />}
+        {modalEdit && <Modal />}
         <NavBar />
         <Header />
         <MainDashboard />
