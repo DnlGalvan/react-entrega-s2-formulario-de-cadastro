@@ -6,6 +6,10 @@ export const TechContext = createContext({});
 
 export const TechProvider = ({ children }) => {
   const [modal, setModal] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
+  const [techId, setTechId] = useState("");
+  const [techTitle, setTechTitle] = useState("");
+  const [techStatus, setTechStatus] = useState("");
 
   const addTech = async (data) => {
     const token = localStorage.getItem("userToken");
@@ -35,6 +39,26 @@ export const TechProvider = ({ children }) => {
         toast.success("Tecnologia excluída com sucesso", {
           theme: "colored",
         });
+        setModalEdit(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.response.data.message, {
+          theme: "colored",
+        });
+      });
+  };
+
+  const editTech = async (data) => {
+    const token = localStorage.getItem("userToken");
+    api.defaults.headers.authorization = `Bearer ${token}`;
+    await api
+      .put(`/users/techs/${techId}`, data)
+      .then((res) => {
+        toast.success("Tecnologia excluída com sucesso", {
+          theme: "colored",
+        });
+        setModalEdit(false);
       })
       .catch((err) => {
         console.log(err);
@@ -45,7 +69,23 @@ export const TechProvider = ({ children }) => {
   };
 
   return (
-    <TechContext.Provider value={{ addTech, deleteTech, modal, setModal }}>
+    <TechContext.Provider
+      value={{
+        addTech,
+        deleteTech,
+        editTech,
+        modal,
+        setModal,
+        modalEdit,
+        setModalEdit,
+        setTechId,
+        techId,
+        techTitle,
+        setTechTitle,
+        techStatus,
+        setTechStatus,
+      }}
+    >
       {children}
     </TechContext.Provider>
   );

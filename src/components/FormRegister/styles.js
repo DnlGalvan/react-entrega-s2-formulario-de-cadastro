@@ -81,6 +81,11 @@ export const Form = styled.form`
         }
     }
 
+    .select {
+
+
+    }
+
     .form-error {
         font-size: 12px;
         height: 20px;

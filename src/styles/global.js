@@ -20,7 +20,7 @@ const Global = createGlobalStyle`
         list-style: none;
         border: none;
         box-sizing: border-box;
-        outline: 0;
+        outline: none;
     }
 
     body {

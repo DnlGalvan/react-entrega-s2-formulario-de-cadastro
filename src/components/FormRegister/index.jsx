@@ -12,12 +12,12 @@ const FormRegister = () => {
     const { onSubmitRegister } = useContext(UserContext)
     
     const formSchema = yup.object().shape({
-        name: yup.string().required('Nome é obrigatório'),
-        email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
-        password: yup.string().required("Senha obrigatória").matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/, "Ao menos 1 número, 1 letra minúscula, 1 letra maiúscula e 1 caracter especial (#?!@$ %^&*-)"),
-        confirmPassword: yup.string().oneOf([yup.ref('password')], "Confirmação deve ser igual a senha"),
-        bio: yup.string().required("Bio é obrigatório"),
-        contact: yup.string().required("Contato é obrigatório"),
+        name: yup.string().trim().required('Nome é obrigatório'),
+        email: yup.string().trim().required("E-mail obrigatório").email("E-mail inválido"),
+        password: yup.string().trim().required("Senha obrigatória").matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&.*])(?=.{8,})/, "Ao menos 1 número, 1 letra minúscula, 1 letra maiúscula e 1 caracter especial (#?!@$ %^&*-)"),
+        confirmPassword: yup.string().trim().required("Confirmação é obrigatória").oneOf([yup.ref("password")], "Confirmação deve ser igual a senha"),
+        bio: yup.string().trim().required("Bio é obrigatório"),
+        contact: yup.string().trim().required("Contato é obrigatório"),
         course_module: yup.string().required("Módulo é obrigatório")
 
     });
@@ -46,7 +46,7 @@ const FormRegister = () => {
                     <input className="form-input" type="password" id="password" placeholder="Digite aqui sua senha" {...register("password")}/>
                     <span className="form-error">{errors.password?.message}</span>
                     <label className="form-label" htmlFor="confirm-password">Confirmar senha</label>
-                    <input className="form-input" type="password" id="confirm-password" placeholder="Digite aqui sua senha" {...register("password")}/>
+                    <input className="form-input" type="password" id="confirm-password" placeholder="Digite aqui sua senha" {...register("confirmPassword")}/>
                     <span className="form-error">{errors.confirmPassword?.message}</span>
                     <label className="form-label" htmlFor="bio">Bio</label>
                     <input className="form-input" type="text" id="bio" placeholder="Fale sobre você" {...register("bio")}/>
@@ -55,7 +55,7 @@ const FormRegister = () => {
                     <input className="form-input" type="text" id="contact" placeholder="Opção de contato" {...register("contact")}/>
                     <span className="form-error">{errors.contact?.message}</span>
                     <label className="form-label" htmlFor="course_module">Selecionar módulo</label>
-                    <select className="form-input" type="text" id="course_module" placeholder="Digite aqui seu nome" {...register("course_module")}>
+                    <select className="form-input select" type="text" id="course_module" placeholder="Digite aqui seu nome" {...register("course_module")}>
                         <option value="Primeiro Módulo (Introdução ao Frontend)">Primeiro módulo</option>
                         <option value="Segundo Módulo (Frontend Avaçado)">Segundo módulo</option>
                         <option value="Terceiro Módulo (Introdução ao Backend)">Terceiro módulo</option>
