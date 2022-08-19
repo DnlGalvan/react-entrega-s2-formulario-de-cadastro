@@ -3,7 +3,7 @@ import * as yup from "yup"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useNavigate } from "react-router-dom"
-import { UserContext } from "../../constexts/UserContext"
+import { IUserData, UserContext } from "../../constexts/UserContext"
 import 'react-toastify/dist/ReactToastify.css'
 import { useContext } from "react"
 
@@ -22,7 +22,7 @@ const FormRegister = () => {
 
     });
     
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm<IUserData>({
         resolver: yupResolver(formSchema),
     });
 
@@ -55,7 +55,7 @@ const FormRegister = () => {
                     <input className="form-input" type="text" id="contact" placeholder="Opção de contato" {...register("contact")}/>
                     <span className="form-error">{errors.contact?.message}</span>
                     <label className="form-label" htmlFor="course_module">Selecionar módulo</label>
-                    <select className="form-input select" type="text" id="course_module" placeholder="Digite aqui seu nome" {...register("course_module")}>
+                    <select className="form-input select" id="course_module" placeholder="Digite aqui seu nome" {...register("course_module")}>
                         <option value="Primeiro Módulo (Introdução ao Frontend)">Primeiro módulo</option>
                         <option value="Segundo Módulo (Frontend Avaçado)">Segundo módulo</option>
                         <option value="Terceiro Módulo (Introdução ao Backend)">Terceiro módulo</option>

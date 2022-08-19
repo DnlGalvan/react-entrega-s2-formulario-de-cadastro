@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "react-toastify/dist/ReactToastify.css";
 import { ButtonClose, Container, DivTitle, Form } from "./styles";
+import { IUserTechs } from "../../constexts/UserContext";
 
 const Modal = () => {
   const {
@@ -29,7 +30,7 @@ const Modal = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IUserTechs>({
     resolver: yupResolver(formSchema),
   });
 
@@ -51,7 +52,7 @@ const Modal = () => {
             />
             <span>{errors.title?.message}</span>
             <label htmlFor="status">Selecionar status</label>
-            <select type="text" id="status" {...register("status")}>
+            <select id="status" {...register("status")}>
               <option value="Iniciante">Iniciante</option>
               <option value="Intermediário">Intermediário</option>
               <option value="Avançado">Avançado</option>
@@ -78,7 +79,6 @@ const Modal = () => {
             <span>{errors.title?.message}</span>
             <label htmlFor="status">Selecionar status</label>
             <select
-              type="text"
               id="status"
               defaultValue={techStatus}
               {...register("status")}

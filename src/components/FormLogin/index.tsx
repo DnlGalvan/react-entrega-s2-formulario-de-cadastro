@@ -5,7 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { useNavigate } from "react-router-dom"
 import 'react-toastify/dist/ReactToastify.css'
 import { useContext } from "react"
-import { UserContext } from "../../constexts/UserContext"
+import { IUserData, UserContext } from "../../constexts/UserContext"
+
 
 
 const FormLogin = () => {
@@ -19,7 +20,7 @@ const FormLogin = () => {
         password: yup.string().required("Senha obrigatória")
     });
     
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm<IUserData>({
         resolver: yupResolver(formSchema),
     });
     
