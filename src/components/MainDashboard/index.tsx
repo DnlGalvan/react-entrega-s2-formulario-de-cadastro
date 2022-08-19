@@ -1,8 +1,8 @@
-import { Main } from "./styles";
-import { HiPlus } from "react-icons/hi";
-import TechsList from "../TechsList";
 import { useContext } from "react";
+import { HiPlus } from "react-icons/hi";
 import { TechContext } from "../../constexts/TechContext";
+import TechsList from "../TechsList";
+import { Main } from "./styles";
 
 const MainDashboard = () => {
   const { setModal } = useContext(TechContext);

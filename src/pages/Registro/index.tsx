@@ -1,5 +1,5 @@
-import FormRegister from "../../components/FormRegister"
 import { motion } from 'framer-motion'
+import FormRegister from "../../components/FormRegister"
 
 const Registro = () => {
     return (

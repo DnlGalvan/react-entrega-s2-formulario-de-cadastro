@@ -36,11 +36,9 @@ export const TechProvider = ({ children }: ITechsProviderProps) => {
   const token = localStorage.getItem("userToken");
 
   const addTech = async (data: IUserTechs) => {
-    
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`
     await api
-      .post<IUserTechs>("/users/techs", data, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+    .post<IUserTechs>("/users/techs", data)
       .then((res) => {
         toast.success("Tecnologia adicionada com sucesso", {
           theme: "colored",
@@ -56,11 +54,9 @@ export const TechProvider = ({ children }: ITechsProviderProps) => {
   };
 
   const deleteTech = async (techId: string) => {
-  
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`
     await api
-      .delete<IUserTechs>(`/users/techs/${techId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .delete<IUserTechs>(`/users/techs/${techId}`)
       .then((res) => {
         toast.success("Tecnologia excluída com sucesso", {
           theme: "colored",
@@ -76,11 +72,9 @@ export const TechProvider = ({ children }: ITechsProviderProps) => {
   };
 
   const editTech = async (data: IUserTechs) => {
-
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`
     await api
-      .put<IUserTechs>(`/users/techs/${techId}`, data, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .put<IUserTechs>(`/users/techs/${techId}`, data)
       .then((res: AxiosResponse) => {
         toast.success("Tecnologia excluída com sucesso", {
           theme: "colored",

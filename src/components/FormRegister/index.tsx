@@ -1,11 +1,11 @@
-import { Main, Container, Title, Form, DivTitle, ButtonBack  } from "./styles"
-import * as yup from "yup"
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
+import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
+import { useForm } from "react-hook-form"
+import * as yup from "yup"
+import { yupResolver } from "@hookform/resolvers/yup"
 import { IUserData, UserContext } from "../../constexts/UserContext"
 import 'react-toastify/dist/ReactToastify.css'
-import { useContext } from "react"
+import { Main, Container, Title, Form, DivTitle, ButtonBack  } from "./styles"
 
 const FormRegister = () => {
     const navigate = useNavigate()
