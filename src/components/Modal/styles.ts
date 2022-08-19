@@ -9,6 +9,20 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation-name: animatetop;
+  animation-duration: 0.6s;
+
+  @keyframes animatetop {
+    from {
+        top: 0;
+        opacity: 0
+    }
+
+    to {
+        top: 55%;
+        opacity: 1
+    }
+  }
 `;
 
 export const DivTitle = styled.div`
@@ -84,8 +98,6 @@ export const Form = styled.form`
   > div {
     display: flex;
     gap: 10px;
-
-  
   }
   > button,
   div button {
@@ -113,5 +125,4 @@ export const Form = styled.form`
       background: var(--gray-2);
     }
   }
-
 `;

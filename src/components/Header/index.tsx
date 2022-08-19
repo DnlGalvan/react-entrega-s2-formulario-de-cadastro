@@ -1,6 +1,6 @@
-import { HeaderContainer } from "./styles"
 import { useContext } from "react"
 import { UserContext } from "../../constexts/UserContext"
+import { HeaderContainer } from "./styles"
 
 const Header = () => {
     const { user } = useContext(UserContext)

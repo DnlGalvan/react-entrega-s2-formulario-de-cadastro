@@ -1,37 +1,29 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import api from "../services/api";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { AxiosError } from "axios";
+import api from "../services/api";
 
 interface IUserProviderProps {
   children: ReactNode;
 }
 
 export interface IUserData {
-  id: string
-  name: string;
+  id?: string
+  name?: string;
   email: string;
   password: string;
   confirmPassword?: string;
-  bio: string;
-  contact: string;
-  course_module: string;
+  bio?: string;
+  contact?: string;
+  course_module?: string;
   techs: IUserTechs[]
-  works: IUserWorks[]
 }
 
 export interface IUserTechs {
   id: string
   status: string
   title: string
-}
-
-interface IUserWorks {
-  id: string
-  title: string
-  description: string
-  deploy_url: string
 }
 
 interface IUserDataResponse {
@@ -57,16 +49,15 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<IUserData>({} as IUserData);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     async function loadUser() {
       const token = localStorage.getItem("userToken");
-
+      
       if (token) {
+        api.defaults.headers.common["Authorization"] = `Bearer ${token}`
         try {
-          const { data } = await api.get<IUserData>("/profile", {
-            headers: { Authorization: `Bearer ${token}` },
-          });
+          const { data } = await api.get<IUserData>("/profile");
           setUser(data);
         } catch (error) {
           console.error(error);

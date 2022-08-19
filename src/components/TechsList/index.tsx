@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import Techs from "../Techs";
 import { UserContext } from "../../constexts/UserContext";
+import Techs from "../Techs";
 import { List, EmptyList } from "./styles";
 
 const TechsList = () => {

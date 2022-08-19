@@ -1,10 +1,10 @@
+import { useContext } from "react";
 import { motion } from "framer-motion";
 import { Navigate } from "react-router-dom";
 import Header from "../../components/Header";
 import NavBar from "../../components/NavBar";
 import MainDashboard from "../../components/MainDashboard";
 import Modal from "../../components/Modal";
-import { useContext } from "react";
 import { UserContext } from "../../constexts/UserContext";
 import { TechContext } from "../../constexts/TechContext";
 import { Div } from "./styles";
