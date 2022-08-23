@@ -9,7 +9,7 @@ const TechsList = () => {
 
   return (
     <>
-      {techs.length > 0 ? (
+      {techs.length ? (
         <List>
           {techs.map(({ id, title, status }) => (
             <Techs key={id} id={id} title={title} status={status} />

@@ -17,30 +17,30 @@ export interface IUserData {
   bio?: string;
   contact?: string;
   course_module?: string;
-  techs: IUserTechs[]
+  techs: IUserTechs[];
 }
 
 export interface IUserTechs {
-  id: string
-  status: string
-  title: string
+  id: string;
+  status: string;
+  title: string;
 }
 
 interface IUserDataResponse {
-  user: IUserData
-  token: string
+  user: IUserData;
+  token: string;
 }
 
 export interface IUserError {
-  error: string
-  message: string
+  error: string;
+  message: string;
 }
 
 interface IUserProviderData {
-  user: IUserData
-  loading: boolean
-  onSubmitLogin: (data: IUserData) => void
-  onSubmitRegister: (data: IUserData) => void
+  user: IUserData;
+  loading: boolean;
+  onSubmitLogin: (data: IUserData) => void;
+  onSubmitRegister: (data: IUserData) => void;
 }
 
 export const UserContext = createContext<IUserProviderData>({} as IUserProviderData);
@@ -60,7 +60,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           const { data } = await api.get<IUserData>("/profile");
           setUser(data);
         } catch (error) {
-          console.error(error);
+          const err = error as AxiosError 
+          console.error(err.message);
         }
       }
       setLoading(false);
@@ -81,7 +82,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         navigate("/dashboard", { replace: true });
       })
       .catch((error: AxiosError<IUserError>) => {
-        toast.error(error.response?.data.message, {
+        toast.error("Email ou senha inválidos", {
           theme: "colored",
         });
         localStorage.clear();
@@ -97,8 +98,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         });
         navigate("/login", { replace: true });
       })
-      .catch((error) => {
-        toast.error(error.response.data.message, {
+      .catch((error: AxiosError<IUserError>) => {
+        toast.error(error.response?.data.message, {
           theme: "colored",
         });
       });

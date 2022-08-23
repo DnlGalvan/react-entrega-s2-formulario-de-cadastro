@@ -45,9 +45,9 @@ export const TechProvider = ({ children }: ITechsProviderProps) => {
         });
         setModal(false);
       })
-      .catch((err: AxiosError<IUserError>) => {
-        console.log(err);
-        toast.error(err.response?.data.message, {
+      .catch((error: AxiosError<IUserError>) => {
+        console.log(error);
+        toast.error("Tecnologia já cadastrada, você pode apenas editá-la!", {
           theme: "colored",
         });
       });
@@ -63,9 +63,9 @@ export const TechProvider = ({ children }: ITechsProviderProps) => {
         });
         setModalEdit(false);
       })
-      .catch((err: AxiosError<IUserError>) => {
-        console.log(err);
-        toast.error(err.response?.data.message, {
+      .catch((error: AxiosError<IUserError>) => {
+        console.log(error);
+        toast.error("Algo deu errado ao excluir a tecnologia!", {
           theme: "colored",
         });
       });
@@ -76,14 +76,14 @@ export const TechProvider = ({ children }: ITechsProviderProps) => {
     await api
       .put<IUserTechs>(`/users/techs/${techId}`, data)
       .then((res: AxiosResponse) => {
-        toast.success("Tecnologia excluída com sucesso", {
+        toast.success("Tecnologia atualizada com sucesso", {
           theme: "colored",
         });
         setModalEdit(false);
       })
-      .catch((err: AxiosError<IUserError>) => {
-        console.log(err);
-        toast.error(err.response?.data.message, {
+      .catch((error: AxiosError<IUserError>) => {
+        console.log(error);
+        toast.error("Algo deu errado ao atualizar a tecnologia!", {
           theme: "colored",
         });
       });
