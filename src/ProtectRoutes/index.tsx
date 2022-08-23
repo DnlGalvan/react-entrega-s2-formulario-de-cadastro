@@ -4,7 +4,8 @@ import LoadingSpinner from "../components/Loading";
 import { UserContext } from "../constexts/UserContext";
 
 const ProtectedRoutes = () => {
-  const { user, loading } = useContext(UserContext);
+  const { loading } = useContext(UserContext);
+  const user = window.localStorage.getItem("user")
 
   if (loading) {
     return (

@@ -45,9 +45,9 @@ export const TechProvider = ({ children }: ITechsProviderProps) => {
         });
         setModal(false);
       })
-      .catch((err: AxiosError<IUserError>) => {
-        console.log(err);
-        toast.error(err.response?.data.message, {
+      .catch((error: AxiosError<IUserError>) => {
+        console.log(error);
+        toast.error(error.response?.data.message, {
           theme: "colored",
         });
       });
@@ -63,9 +63,9 @@ export const TechProvider = ({ children }: ITechsProviderProps) => {
         });
         setModalEdit(false);
       })
-      .catch((err: AxiosError<IUserError>) => {
-        console.log(err);
-        toast.error(err.response?.data.message, {
+      .catch((error: AxiosError<IUserError>) => {
+        console.log(error);
+        toast.error(error.response?.data.message, {
           theme: "colored",
         });
       });
@@ -81,9 +81,9 @@ export const TechProvider = ({ children }: ITechsProviderProps) => {
         });
         setModalEdit(false);
       })
-      .catch((err: AxiosError<IUserError>) => {
-        console.log(err);
-        toast.error(err.response?.data.message, {
+      .catch((error: AxiosError<IUserError>) => {
+        console.log(error);
+        toast.error(error.response?.data.message, {
           theme: "colored",
         });
       });
