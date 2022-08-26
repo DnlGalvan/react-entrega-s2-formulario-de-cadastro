@@ -1,31 +1,30 @@
-import { createContext, useState, ReactNode, Dispatch } from "react";
+import { createContext, useState, ReactNode } from "react";
 import { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import api from "../services/api";
 import { IUserError, IUserTechs } from "./UserContext";
 
 interface ITechsProviderProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
-interface ITechsProviderData {
-  modal: boolean
-  setModal: Dispatch<React.SetStateAction<boolean>>
-  modalEdit: boolean
-  setModalEdit: Dispatch<React.SetStateAction<boolean>>
-  techId: string
-  setTechId: Dispatch<React.SetStateAction<string>>
-  techTitle: string
-  setTechTitle: Dispatch<React.SetStateAction<string>>
-  techStatus: string
-  setTechStatus: Dispatch<React.SetStateAction<string>>
-  addTech: (data: IUserTechs) => void
-  deleteTech: (techId: string) => void
-  editTech: (data: IUserTechs) => void
+interface ITechsContextData {
+  modal: boolean;
+  setModal: (state: boolean) => void; /* Dispatch<React.SetStateAction<boolean>> */
+  modalEdit: boolean;
+  setModalEdit: (state: boolean) => void;
+  techId: string;
+  setTechId: (state: string) => void;
+  techTitle: string;
+  setTechTitle: (state: string) => void;
+  techStatus: string;
+  setTechStatus: (state: string) => void;
+  addTech: (data: IUserTechs) => void;
+  deleteTech: (techId: string) => void;
+  editTech: (data: IUserTechs) => void;
 }
 
-
-export const TechContext = createContext<ITechsProviderData>({} as ITechsProviderData);
+export const TechContext = createContext<ITechsContextData>({} as ITechsContextData);
 
 export const TechProvider = ({ children }: ITechsProviderProps) => {
   const [modal, setModal] = useState(false);
@@ -36,9 +35,9 @@ export const TechProvider = ({ children }: ITechsProviderProps) => {
   const token = localStorage.getItem("userToken");
 
   const addTech = async (data: IUserTechs) => {
-    api.defaults.headers.common["Authorization"] = `Bearer ${token}`
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     await api
-    .post<IUserTechs>("/users/techs", data)
+      .post<IUserTechs>("/users/techs", data)
       .then((res) => {
         toast.success("Tecnologia adicionada com sucesso", {
           theme: "colored",
@@ -54,7 +53,7 @@ export const TechProvider = ({ children }: ITechsProviderProps) => {
   };
 
   const deleteTech = async (techId: string) => {
-    api.defaults.headers.common["Authorization"] = `Bearer ${token}`
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     await api
       .delete<IUserTechs>(`/users/techs/${techId}`)
       .then((res) => {
@@ -72,7 +71,7 @@ export const TechProvider = ({ children }: ITechsProviderProps) => {
   };
 
   const editTech = async (data: IUserTechs) => {
-    api.defaults.headers.common["Authorization"] = `Bearer ${token}`
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     await api
       .put<IUserTechs>(`/users/techs/${techId}`, data)
       .then((res: AxiosResponse) => {
